@@ -1374,31 +1374,23 @@ function createParty() {
 
 async function submitWhy() {
 
-
-    const checked =
-
-        [
-            ...document.querySelectorAll(
-                'input[name="reason"]:checked'
-            )
-        ]
-        .map(
-            item =>
-                item.value
-        );
+    const checked = [
+        ...document.querySelectorAll(
+            'input[name="reason"]:checked'
+        )
+    ].map(
+        item => item.value
+    );
 
 
     const text =
         document
-            .getElementById(
-                "whyText"
-            )
+            .getElementById("whyText")
             .value;
 
 
-    if(
-        checked.length === 0
-        &&
+    if (
+        checked.length === 0 &&
         text.trim() === ""
     ) {
 
@@ -1407,25 +1399,20 @@ async function submitWhy() {
         );
 
         return;
-
     }
 
 
-    await sendData({
+    const success = await sendData({
 
-        type:
-            "why",
+        type: "why",
 
         reasons:
-            checked.join(
-                ", "
-            ),
+            checked.join(", "),
 
         message:
             text,
 
-        meeting:
-            ""
+        meeting: ""
 
     });
 
@@ -1444,21 +1431,19 @@ async function submitWhy() {
 
 async function submitMeeting() {
 
-
     const selected =
         document.querySelector(
             'input[name="meeting"]:checked'
         );
 
 
-    if(!selected) {
+    if (!selected) {
 
         alert(
             "Please choose a time."
         );
 
         return;
-
     }
 
 
@@ -1466,39 +1451,26 @@ async function submitMeeting() {
         selected.value;
 
 
-    if(
-        meeting === "Custom"
-    ) {
-
+    if (meeting === "Custom") {
 
         const date =
             document
-                .getElementById(
-                    "customDate"
-                )
+                .getElementById("customDate")
                 .value;
-
 
         const time =
             document
-                .getElementById(
-                    "customTime"
-                )
+                .getElementById("customTime")
                 .value;
 
 
-        if(
-            !date
-            ||
-            !time
-        ) {
+        if (!date || !time) {
 
             alert(
                 "Please choose a date and time."
             );
 
             return;
-
         }
 
 
@@ -1510,17 +1482,13 @@ async function submitMeeting() {
 
     await sendData({
 
-        type:
-            "meeting",
+        type: "meeting",
 
-        reasons:
-            "",
+        reasons: "",
 
-        message:
-            "",
+        message: "",
 
-        meeting:
-            meeting
+        meeting: meeting
 
     });
 
@@ -1549,59 +1517,58 @@ async function submitMeeting() {
 
 async function sendData(data) {
 
+    try {
 
-    if(
-        GOOGLE_SCRIPT_URL
-        ===
-        "https://script.google.com/macros/s/AKfycbyCz4KqQgv_Ej5vNMJ7fv1b9FBhlUQRRM6wkwNFwIO1UkC_NKtXXa9daw3UChS9iIaRjA/exec"
-    ) {
+        const formData = new URLSearchParams();
 
-        console.log(
-            "Demo mode:",
-            data
+        formData.append(
+            "type",
+            data.type || ""
         );
 
-        return;
+        formData.append(
+            "reasons",
+            data.reasons || ""
+        );
 
-    }
+        formData.append(
+            "message",
+            data.message || ""
+        );
 
-
-    try {
+        formData.append(
+            "meeting",
+            data.meeting || ""
+        );
 
 
         await fetch(
             GOOGLE_SCRIPT_URL,
             {
+                method: "POST",
 
-                method:
-                    "POST",
+                mode: "no-cors",
 
-                mode:
-                    "no-cors",
-
-                headers: {
-
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-
-                },
-
-                body:
-                    JSON.stringify(
-                        data
-                    )
-
+                body: formData
             }
         );
 
 
-    } catch(error) {
+        console.log(
+            "Antwort wurde gesendet."
+        );
 
+        return true;
+
+
+    } catch (error) {
 
         console.error(
-            "Could not send response:",
+            "Fehler beim Senden:",
             error
         );
+
+        return false;
 
     }
 
