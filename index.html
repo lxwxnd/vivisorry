@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I'm Sorry, Vivi 🦭</title>
+
+<style>
+
+/* =========================================================
+   FRIENDSHIP THEME
+   ========================================================= */
+
+:root {
+    --blue: #79bde8;
+    --blue-dark: #4d9fd1;
+    --blue-light: #e8f6ff;
+
+    --background: #dff3ff;
+    --card: rgba(255,255,255,.94);
+
+    --text: #344b5c;
+    --muted: #7892a3;
+
+    --gray-button: #edf2f5;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,255,255,.9),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(165,220,247,.65),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #dff4ff,
+            #f5fbff
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND BUBBLES
+   ========================================================= */
+
+.bubble {
+    position: fixed;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.4);
+
+    pointer-events: none;
+
+    animation:
+        bubbleFloat 8s ease-in-out infinite;
+}
+
+.bubble.one {
+    width: 110px;
+    height: 110px;
+
+    left: 4%;
+    top: 10%;
+}
+
+.bubble.two {
+    width: 65px;
+    height: 65px;
+
+    right: 9%;
+    top: 20%;
+
+    animation-delay: 2s;
+}
+
+.bubble.three {
+    width: 150px;
+    height: 150px;
+
+    right: 2%;
+    bottom: 5%;
+
+    animation-delay: 4s;
+}
+
+.bubble.four {
+    width: 50px;
+    height: 50px;
+
+    left: 15%;
+    bottom: 20%;
+
+    animation-delay: 1s;
+}
+
+@keyframes bubbleFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+
+/* =========================================================
+   SEALS
+   ========================================================= */
+
+.seal {
+    position: fixed;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: .55;
+
+    animation:
+        sealFloat 5s ease-in-out infinite;
+}
+
+.seal.one {
+    left: 4%;
+    bottom: 8%;
+
+    font-size: 55px;
+}
+
+.seal.two {
+    right: 5%;
+    top: 8%;
+
+    font-size: 50px;
+
+    animation-delay: 1.5s;
+}
+
+.seal.three {
+    right: 15%;
+    bottom: 17%;
+
+    font-size: 35px;
+
+    animation-delay: 3s;
+}
+
+@keyframes sealFloat {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-4deg);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(5deg);
+    }
+}
+
+
+/* =========================================================
+   MAIN APP
+   ========================================================= */
+
+.app {
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card {
+    width: min(92vw, 540px);
+
+    padding: 42px 30px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 32px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px
+        rgba(72,130,165,.18);
+
+    backdrop-filter:
+        blur(15px);
+
+    animation:
+        cardAppear .7s ease;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   SCREENS
+   ========================================================= */
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+
+    animation:
+        screenAppear .5s ease;
+}
+
+@keyframes screenAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+}
+
+
+/* =========================================================
+   ICONS
+   ========================================================= */
+
+.big-seal {
+    font-size: 95px;
+
+    margin-bottom: 10px;
+
+    animation:
+        sealBounce 2s ease-in-out infinite;
+}
+
+@keyframes sealBounce {
+
+    0%, 100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(3deg);
+    }
+}
+
+.big-face {
+    font-size: 80px;
+
+    margin-bottom: 10px;
+}
+
+.friend-icon {
+    font-size: 70px;
+
+    animation:
+        gentleBounce 2s infinite ease-in-out;
+}
+
+@keyframes gentleBounce {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+h1 {
+    margin:
+        10px 0 15px;
+
+    font-size:
+        clamp(32px, 8vw, 47px);
+
+    line-height: 1.1;
+}
+
+h2 {
+    margin:
+        10px 0 12px;
+
+    font-size: 31px;
+}
+
+.subtitle {
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.65;
+
+    margin-bottom: 30px;
+}
+
+.small-note {
+    color: #9aabb7;
+
+    font-size: 14px;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    position: relative;
+}
+
+button {
+    border: none;
+
+    padding:
+        14px 26px;
+
+    border-radius: 999px;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.yes {
+    color: white;
+
+    background:
+        var(--blue);
+
+    box-shadow:
+        0 9px 22px
+        rgba(77,159,209,.28);
+}
+
+.yes:hover {
+    background:
+        var(--blue-dark);
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+}
+
+.no {
+    color:
+        #657784;
+
+    background:
+        var(--gray-button);
+}
+
+.no:hover {
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin:
+        24px 0;
+
+    text-align: left;
+}
+
+.option {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    border-radius: 15px;
+
+    background:
+        #f1f9fd;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.option:hover {
+    background:
+        #e5f5fd;
+
+    transform:
+        translateX(3px);
+}
+
+.option input {
+    width: 18px;
+    height: 18px;
+
+    accent-color:
+        var(--blue);
+}
+
+textarea,
+input[type="date"],
+input[type="time"] {
+
+    width: 100%;
+
+    border:
+        2px solid
+        #d9edf7;
+
+    background:
+        #fbfdff;
+
+    border-radius: 14px;
+
+    padding: 13px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    margin-top: 8px;
+}
+
+textarea {
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+textarea:focus,
+input:focus {
+    border-color:
+        var(--blue);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.submit {
+    width: 100%;
+
+    margin-top: 15px;
+
+    color: white;
+
+    background:
+        var(--blue);
+
+    box-shadow:
+        0 8px 20px
+        rgba(77,159,209,.22);
+}
+
+.submit:hover {
+    background:
+        var(--blue-dark);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   MEETING
+   ========================================================= */
+
+.meeting-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin:
+        25px 0;
+}
+
+.meeting {
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    border:
+        2px solid
+        #dceef7;
+
+    background:
+        white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.meeting:hover {
+
+    border-color:
+        var(--blue);
+
+    background:
+        #f3fbff;
+}
+
+.meeting input {
+
+    margin-right: 10px;
+
+    accent-color:
+        var(--blue);
+}
+
+.custom-date {
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    background:
+        #f1f9fd;
+
+    margin-top: 15px;
+
+    text-align: left;
+}
+
+.custom-date label {
+
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   PARTY PARTICLES
+   ========================================================= */
+
+.confetti {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    animation:
+        confettiFall 2.5s linear forwards;
+}
+
+@keyframes confettiFall {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-30px)
+            rotate(0deg);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(100vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =========================================================
+   SAD EFFECT
+   ========================================================= */
+
+.sad-face {
+
+    font-size: 85px;
+
+    animation:
+        sadShake .8s ease;
+}
+
+@keyframes sadShake {
+
+    0%,100% {
+        transform:
+            translateX(0);
+    }
+
+    25% {
+        transform:
+            translateX(-9px);
+    }
+
+    75% {
+        transform:
+            translateX(9px);
+    }
+}
+
+
+/* =========================================================
+   FINAL
+   ========================================================= */
+
+.final-text {
+
+    color:
+        var(--muted);
+
+    line-height:
+        1.7;
+
+    font-size:
+        17px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width: 520px) {
+
+    .card {
+
+        padding:
+            35px 21px;
+    }
+
+    .buttons {
+
+        flex-direction:
+            column;
+
+        align-items:
+            center;
+    }
+
+    button {
+
+        width:
+            100%;
+    }
+
+    .seal.one {
+
+        left:
+            1%;
+
+        font-size:
+            40px;
+    }
+
+    .seal.two {
+
+        right:
+            1%;
+
+        font-size:
+            38px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ========================================================
+     BACKGROUND
+========================================================= -->
+
+<div class="bubble one"></div>
+<div class="bubble two"></div>
+<div class="bubble three"></div>
+<div class="bubble four"></div>
+
+<div class="seal one">🦭</div>
+<div class="seal two">🦭</div>
+<div class="seal three">🫧</div>
+
+
+<div class="app">
+
+<div class="card">
+
+
+<!-- ========================================================
+     SCREEN 1 — FORGIVENESS
+========================================================= -->
+
+<section
+    id="screen1"
+    class="screen active"
+>
+
+    <div class="big-seal">
+        🦭
+    </div>
+
+    <h1>
+        Can you forgive me?
+    </h1>
+
+    <p class="subtitle">
+
+        I know I messed up,
+        and I'm genuinely sorry.
+
+        <br><br>
+
+        I really value our friendship
+        and I hope we can talk about it.
+
+    </p>
+
+
+    <div class="buttons">
+
+        <button
+            class="yes"
+            id="yesButton"
+        >
+            Yes, I forgive you 🫶
+        </button>
+
+        <button
+            class="no"
+            id="noButton"
+        >
+            Not yet 😢
+        </button>
+
+    </div>
+
+
+    <p class="small-note">
+
+        No pressure. I just wanted to say sorry.
+
+    </p>
+
+</section>
+
+
+
+<!-- ========================================================
+     SCREEN 2 — SAD
+========================================================= -->
+
+<section
+    id="sadScreen"
+    class="screen"
+>
+
+    <div class="sad-face">
+        🥺
+    </div>
+
+    <h2>
+        Oh...
+    </h2>
+
+    <p class="subtitle">
+
+        I understand.
+
+        <br>
+
+        But I'd really like to know
+        what I did wrong.
+
+    </p>
+
+    <button
+        class="submit"
+        onclick="showScreen('whyScreen')"
+    >
+        Tell me why
+    </button>
+
+</section>
+
+
+
+<!-- ========================================================
+     SCREEN 3 — WHY
+========================================================= -->
+
+<section
+    id="whyScreen"
+    class="screen"
+>
+
+    <div class="friend-icon">
+        🦭
+    </div>
+
+    <h2>
+        Why?
+    </h2>
+
+    <p class="subtitle">
+
+        I don't want to argue.
+
+        <br>
+
+        I just want to understand
+        how you feel.
+
+    </p>
+
+
+    <div class="options">
+
+        <label class="option">
+
+            <input
+                type="checkbox"
+                name="reason"
+                value="You hurt my feelings"
+            >
+
+            You hurt my feelings.
+
+        </label>
+
+
+        <label class="option">
+
+            <input
+                type="checkbox"
+                name="reason"
+                value="You didn't listen to me"
+            >
+
+            You didn't listen to me.
+
+        </label>
+
+
+        <label class="option">
+
+            <input
+                type="checkbox"
+                name="reason"
+                value="I need some space"
+            >
+
+            I need some space.
+
+        </label>
+
+    </div>
+
+
+    <textarea
+        id="whyText"
+        placeholder="Anything else you want to tell me..."
+    ></textarea>
+
+
+    <button
+        class="submit"
+        onclick="submitWhy()"
+    >
+        Send my answer
+    </button>
+
+</section>
+
+
+
+<!-- ========================================================
+     SCREEN 4 — MEETING
+========================================================= -->
+
+<section
+    id="meetingScreen"
+    class="screen"
+>
+
+    <div class="big-seal">
+        🦭
+    </div>
+
+    <h2>
+        When can we meet?
+    </h2>
+
+    <p class="subtitle">
+
+        Maybe we can talk about everything
+        in person and clear things up.
+
+    </p>
+
+
+    <div class="meeting-options">
+
+
+        <label class="meeting">
+
+            <input
+                type="radio"
+                name="meeting"
+                value="Wednesday 15:30"
+            >
+
+            Wednesday — 15:30
+
+        </label>
+
+
+        <label class="meeting">
+
+            <input
+                type="radio"
+                name="meeting"
+                value="Friday 16:15"
+            >
+
+            Friday — 16:15
+
+        </label>
+
+
+        <label class="meeting">
+
+            <input
+                type="radio"
+                name="meeting"
+                value="Custom"
+            >
+
+            Another time
+
+        </label>
+
+
+    </div>
+
+
+    <div class="custom-date">
+
+        <label>
+            Date
+        </label>
+
+        <input
+            type="date"
+            id="customDate"
+        >
+
+
+        <label>
+            Time
+        </label>
+
+        <input
+            type="time"
+            id="customTime"
+        >
+
+    </div>
+
+
+    <button
+        class="submit"
+        onclick="submitMeeting()"
+    >
+        Send meeting request
+    </button>
+
+</section>
+
+
+
+<!-- ========================================================
+     SCREEN 5 — FINAL
+========================================================= -->
+
+<section
+    id="finalScreen"
+    class="screen"
+>
+
+    <div class="big-seal">
+        🦭
+    </div>
+
+    <h1>
+        I'm sorry, Vivi.
+    </h1>
+
+    <p class="final-text">
+
+        I hope this little seal
+        made you smile at least a little.
+
+        <br><br>
+
+        Whatever happens,
+        I really am sorry.
+
+        <br><br>
+
+        🦭 🫧 🦭
+
+        <br><br>
+
+        Thank you for hearing me out.
+
+    </p>
+
+</section>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   GOOGLE APPS SCRIPT URL
+
+   HIER SPÄTER DEINE URL EINTRAGEN.
+   ========================================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyCz4KqQgv_Ej5vNMJ7fv1b9FBhlUQRRM6wkwNFwIO1UkC_NKtXXa9daw3UChS9iIaRjA/exec";
+
+
+
+/* =========================================================
+   SCREEN SYSTEM
+   ========================================================= */
+
+function showScreen(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add(
+            "active"
+        );
+}
+
+
+
+/* =========================================================
+   YES BUTTON
+   ========================================================= */
+
+const yesButton =
+    document.getElementById(
+        "yesButton"
+    );
+
+
+yesButton.addEventListener(
+    "mouseenter",
+    () => {
+
+        createParty();
+
+    }
+);
+
+
+yesButton.addEventListener(
+    "click",
+    () => {
+
+        createParty();
+
+        setTimeout(
+            () => {
+
+                showScreen(
+                    "meetingScreen"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   NO BUTTON
+   ========================================================= */
+
+const noButton =
+    document.getElementById(
+        "noButton"
+    );
+
+
+noButton.addEventListener(
+    "mouseenter",
+    () => {
+
+        noButton.textContent =
+            "Not yet 😢";
+
+    }
+);
+
+
+noButton.addEventListener(
+    "click",
+    () => {
+
+        showScreen(
+            "sadScreen"
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   PARTY EFFECT
+   ========================================================= */
+
+function createParty() {
+
+
+    const emojis = [
+
+        "🦭",
+        "✨",
+        "🫧",
+        "🎉",
+        "💙",
+        "⭐"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < 28;
+        i++
+    ) {
+
+
+        setTimeout(
+            () => {
+
+
+                const element =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                element.className =
+                    "confetti";
+
+
+                element.textContent =
+                    emojis[
+                        Math.floor(
+                            Math.random()
+                            *
+                            emojis.length
+                        )
+                    ];
+
+
+                element.style.left =
+                    Math.random()
+                    * 100
+                    + "vw";
+
+
+                element.style.top =
+                    "-30px";
+
+
+                element.style.fontSize =
+                    (
+                        16
+                        +
+                        Math.random()
+                        * 22
+                    )
+                    + "px";
+
+
+                document.body
+                    .appendChild(
+                        element
+                    );
+
+
+                setTimeout(
+                    () => {
+
+                        element.remove();
+
+                    },
+                    3000
+                );
+
+
+            },
+            i * 35
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   WHY FORM
+   ========================================================= */
+
+async function submitWhy() {
+
+
+    const checked =
+
+        [
+            ...document.querySelectorAll(
+                'input[name="reason"]:checked'
+            )
+        ]
+        .map(
+            item =>
+                item.value
+        );
+
+
+    const text =
+        document
+            .getElementById(
+                "whyText"
+            )
+            .value;
+
+
+    if(
+        checked.length === 0
+        &&
+        text.trim() === ""
+    ) {
+
+        alert(
+            "Please choose a reason or write something."
+        );
+
+        return;
+
+    }
+
+
+    await sendData({
+
+        type:
+            "why",
+
+        reasons:
+            checked.join(
+                ", "
+            ),
+
+        message:
+            text,
+
+        meeting:
+            ""
+
+    });
+
+
+    showScreen(
+        "meetingScreen"
+    );
+
+}
+
+
+
+/* =========================================================
+   MEETING FORM
+   ========================================================= */
+
+async function submitMeeting() {
+
+
+    const selected =
+        document.querySelector(
+            'input[name="meeting"]:checked'
+        );
+
+
+    if(!selected) {
+
+        alert(
+            "Please choose a time."
+        );
+
+        return;
+
+    }
+
+
+    let meeting =
+        selected.value;
+
+
+    if(
+        meeting === "Custom"
+    ) {
+
+
+        const date =
+            document
+                .getElementById(
+                    "customDate"
+                )
+                .value;
+
+
+        const time =
+            document
+                .getElementById(
+                    "customTime"
+                )
+                .value;
+
+
+        if(
+            !date
+            ||
+            !time
+        ) {
+
+            alert(
+                "Please choose a date and time."
+            );
+
+            return;
+
+        }
+
+
+        meeting =
+            `${date} at ${time}`;
+
+    }
+
+
+    await sendData({
+
+        type:
+            "meeting",
+
+        reasons:
+            "",
+
+        message:
+            "",
+
+        meeting:
+            meeting
+
+    });
+
+
+    createParty();
+
+
+    setTimeout(
+        () => {
+
+            showScreen(
+                "finalScreen"
+            );
+
+        },
+        600
+    );
+
+}
+
+
+
+/* =========================================================
+   SEND DATA TO GOOGLE SHEETS
+   ========================================================= */
+
+async function sendData(data) {
+
+
+    if(
+        GOOGLE_SCRIPT_URL
+        ===
+        "https://script.google.com/macros/s/AKfycbyCz4KqQgv_Ej5vNMJ7fv1b9FBhlUQRRM6wkwNFwIO1UkC_NKtXXa9daw3UChS9iIaRjA/exec"
+    ) {
+
+        console.log(
+            "Demo mode:",
+            data
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+
+                method:
+                    "POST",
+
+                mode:
+                    "no-cors",
+
+                headers: {
+
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        data
+                    )
+
+            }
+        );
+
+
+    } catch(error) {
+
+
+        console.error(
+            "Could not send response:",
+            error
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
